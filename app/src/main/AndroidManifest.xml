@@ -39,7 +39,10 @@
             android:name="screenovate.com.testutils.SendSms"
             android:enabled="true"
             android:exported="true" />
-
+        <service
+            android:name="screenovate.com.testutils.CreateNotification"
+            android:enabled="true"
+            android:exported="true" />
         <activity
             android:name="screenovate.com.testutils.TestActivity"
             android:exported="true"
