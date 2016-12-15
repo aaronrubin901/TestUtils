@@ -1,4 +1,4 @@
-package screenovate.com.testutils;
+package com.screenovate.automation;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package screenovate.com.testutils;
+package screenovate.com.automation;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

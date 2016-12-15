@@ -1,4 +1,4 @@
-package screenovate.com.testutils;
+package com.screenovate.automation;
 
 import android.content.Context;
 import android.util.Log;

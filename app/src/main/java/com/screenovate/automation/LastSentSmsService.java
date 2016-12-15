@@ -1,4 +1,4 @@
-package screenovate.com.testutils;
+package com.screenovate.automation;
 
 import android.app.Service;
 import android.content.ContentResolver;
