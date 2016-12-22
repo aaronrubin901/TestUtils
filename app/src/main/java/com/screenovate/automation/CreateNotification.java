@@ -4,6 +4,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -23,9 +25,11 @@ public class CreateNotification extends Service {
         String randNumber = String.valueOf(getRandom());
         Log.i("AutomationNotification", "Random notifiction number is " + randNumber);
         Notification noti = new Notification.Builder(this)
-                .setContentTitle("New test notification")
+                .setContentTitle("Automation Notification")
                 .setContentText(randNumber)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.mipmap.ic_notify)
+                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.ic_notify))
                 .setOngoing(false).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // hide the notification after its selected

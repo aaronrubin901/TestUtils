@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId 'com.screenovate.automation'
         minSdkVersion 17
         targetSdkVersion 21
         versionCode 1
-        versionName "1.2"
+        versionName "1.4"
     }
     buildTypes {
         release {
