@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestUtils</string>
+    <string name="app_name">Automation</string>
     <string name="title_activity_test">TestActivity</string>
 
     <string name="hello_world">Hello world!</string>

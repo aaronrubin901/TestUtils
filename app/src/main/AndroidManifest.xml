@@ -62,12 +62,13 @@
 
         <activity
             android:name=".ImageViewerActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <service
             android:name=".IsNotificationAcceesEnabled"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
     </application>
 
 </manifest>
