@@ -1,12 +1,10 @@
 package com.screenovate.automation;
 
 import android.app.Activity;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 
 public class TestActivity extends Activity {
