@@ -20,18 +20,38 @@ public class TestActivity extends Activity {
         setContentView(R.layout.testactivity);
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null){
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        if (savedInstanceState == null) {
+            setImmersiveMode();
         }
 
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setImmersiveMode();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setImmersiveMode();
+    }
+
+    protected void setImmersiveMode() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
+    }
+
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -61,7 +81,7 @@ public class TestActivity extends Activity {
                 Log.i(TAG, "Menu key pressed");
                 return true;
             case KeyEvent.KEYCODE_SEARCH:
-               Log.i(TAG, "Search key pressed");
+                Log.i(TAG, "Search key pressed");
                 return true;
             case KeyEvent.KEYCODE_BACK:
                 onBackPressed();
@@ -70,7 +90,7 @@ public class TestActivity extends Activity {
                 event.startTracking();
                 return true;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-               Log.i(TAG, "Volumen Down pressed");
+                Log.i(TAG, "Volumen Down pressed");
                 return false;
         }
         return super.onKeyDown(keyCode, event);
@@ -79,13 +99,13 @@ public class TestActivity extends Activity {
 
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-       Log.i(TAG, "Pressed for a long time =) ");
+        Log.i(TAG, "Pressed for a long time =) ");
         return true;
     }
 
     @Override
     public void onBackPressed() {
-       Log.i(TAG, "Back key pressed =)");
+        Log.i(TAG, "Back key pressed =)");
         super.onBackPressed();
     }
 
@@ -93,7 +113,7 @@ public class TestActivity extends Activity {
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
-       Log.i(TAG, "Touch press on x: " + x + " y: " + y);
+        Log.i(TAG, "Touch press on x: " + x + " y: " + y);
         return true;
     }
 
