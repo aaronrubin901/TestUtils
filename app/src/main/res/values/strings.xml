@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Automation</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_test">Automation Activity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

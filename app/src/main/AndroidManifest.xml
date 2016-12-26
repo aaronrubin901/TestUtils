@@ -21,6 +21,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".TestActivity"
+            android:exported="true"
+            android:label="@string/title_activity_test"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".WifiBtUtilService"
             android:enabled="true"
@@ -45,20 +58,6 @@
             android:name=".CreateNotification"
             android:enabled="true"
             android:exported="true" />
-
-        <activity
-            android:name=".TestActivity"
-            android:exported="true"
-            android:label="@string/title_activity_test" />
-
-        <!--<receiver android:name=".CallReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.PHONE_STATE" />-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.NEW_OUTGOING_CALL" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
 
         <activity
             android:name=".ImageViewerActivity"
