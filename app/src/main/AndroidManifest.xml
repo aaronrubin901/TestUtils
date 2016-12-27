@@ -43,7 +43,7 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".LastSentSmsService"
+            android:name=".SmsUtilService"
             android:enabled="true"
             android:exported="true" />
         <service
