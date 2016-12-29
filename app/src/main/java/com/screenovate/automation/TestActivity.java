@@ -111,8 +111,8 @@ public class TestActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         Log.i(TAG, "Touch press on x: " + x + " y: " + y);
         return true;
     }
