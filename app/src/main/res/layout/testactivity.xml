@@ -4,36 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignTop="@id/action_bar"
-    android:background="@color/background_floating_material_dark"
+    android:background="@color/background_floating_material_light"
     android:orientation="vertical">
-
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="19dp"
-        android:id="@+id/button2" />
 
     <CheckBox
         android:text="CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_alignStart="@+id/button2"
-        android:layout_marginTop="80dp"
-        android:id="@+id/checkBox" />
+        android:layout_marginTop="64dp"
+        android:id="@+id/checkBox"
+        android:layout_marginStart="80dp"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true" />
 
     <RadioButton
         android:text="RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:id="@+id/radioButton2"
         android:layout_below="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="80dp"
-        android:id="@+id/radioButton2" />
+        android:layout_alignStart="@+id/checkBox" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:ems="10"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="68dp"
+        android:id="@+id/editText"
+        android:hint="Type Keyboard Here"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/checkBox" />
 
 </RelativeLayout>
