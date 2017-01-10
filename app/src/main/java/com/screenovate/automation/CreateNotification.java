@@ -2,10 +2,12 @@ package com.screenovate.automation;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -38,12 +40,16 @@ public class CreateNotification extends Service {
 
     private void createNotification(String randomNumber) {
         Log.i(TAG, "Random notification number is " + randomNumber);
+        Intent intent = new Intent(this, ImageViewerActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
         Notification noti = new Notification.Builder(this)
                 .setContentTitle("Automation Notification")
                 .setContentText(randomNumber)
                 .setSmallIcon(R.mipmap.ic_notify)
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
                         R.mipmap.ic_notify))
+                .setContentIntent(pendingIntent)
                 .setOngoing(false).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // hide the notification after its selected
