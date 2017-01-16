@@ -22,6 +22,7 @@ public class CreateNotification extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
         String randomNumber = "";
         Bundle extras = intent.getExtras();
         if (extras != null) {
@@ -29,13 +30,12 @@ public class CreateNotification extends Service {
                 randomNumber = extras.getString("random");
                 Log.i(TAG, "Creating notification with random number " + randomNumber);
                 createNotification(randomNumber);
-            }
-            else {
+            } else {
                 Log.w(TAG, "Please insert Random number");
             }
         }
 
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     private void createNotification(String randomNumber) {
