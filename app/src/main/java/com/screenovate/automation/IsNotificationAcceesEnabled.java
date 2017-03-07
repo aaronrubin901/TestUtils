@@ -12,7 +12,7 @@ public class IsNotificationAcceesEnabled extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String enabledAppList = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
         Log.i(TAG, enabledAppList);
-        boolean isEnabled = enabledAppList.contains("com.screenovate.BluePhone");
+        boolean isEnabled = enabledAppList.contains("com.screenovate.bluephone");
         Log.i(TAG, "Is Notification access enabled ? " + isEnabled);
         return super.onStartCommand(intent, flags, startId);
     }

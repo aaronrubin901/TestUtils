@@ -1,0 +1,178 @@
+[1mdiff --git a/app/app.iml b/app/app.iml[m
+[1mindex 789d53f..bd5731a 100644[m
+[1m--- a/app/app.iml[m
+[1m+++ b/app/app.iml[m
+[36m@@ -103,7 +103,6 @@[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />[m
+[31m-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />[m
+       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />[m
+[1mdiff --git a/app/build.gradle b/app/build.gradle[m
+[1mindex 255b2bb..9b83029 100644[m
+[1m--- a/app/build.gradle[m
+[1m+++ b/app/build.gradle[m
+[36m@@ -8,7 +8,7 @@[m [mandroid {[m
+         minSdkVersion 17[m
+         targetSdkVersion 21[m
+         versionCode 1[m
+[31m-        versionName "1.11"[m
+[32m+[m[32m        versionName "1.12"[m
+         setProperty("archivesBaseName", "automation-$versionName")[m
+         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'[m
+     }[m
+[1mdiff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml[m
+[1mindex c7bca26..cbf9822 100644[m
+[1m--- a/app/src/main/AndroidManifest.xml[m
+[1m+++ b/app/src/main/AndroidManifest.xml[m
+[36m@@ -1,7 +1,7 @@[m
+ <?xml version="1.0" encoding="utf-8"?>[m
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"[m
+     package="com.screenovate.automation">[m
+[31m-    [m
+[32m+[m
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />[m
+     <uses-permission android:name="android.permission.CALL_PHONE" />[m
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />[m
+[1mdiff --git a/app/src/main/java/com/screenovate/automation/IsNotificationAcceesEnabled.java b/app/src/main/java/com/screenovate/automation/IsNotificationAcceesEnabled.java[m
+[1mindex 2f37639..fc9adfc 100644[m
+[1m--- a/app/src/main/java/com/screenovate/automation/IsNotificationAcceesEnabled.java[m
+[1m+++ b/app/src/main/java/com/screenovate/automation/IsNotificationAcceesEnabled.java[m
+[36m@@ -12,7 +12,7 @@[m [mpublic class IsNotificationAcceesEnabled extends Service {[m
+     public int onStartCommand(Intent intent, int flags, int startId) {[m
+         String enabledAppList = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");[m
+         Log.i(TAG, enabledAppList);[m
+[31m-        boolean isEnabled = enabledAppList.contains("com.screenovate.BluePhone");[m
+[32m+[m[32m        boolean isEnabled = enabledAppList.contains("com.screenovate.bluephone");[m
+         Log.i(TAG, "Is Notification access enabled ? " + isEnabled);[m
+         return super.onStartCommand(intent, flags, startId);[m
+     }[m
+[1mdiff --git a/app/src/main/java/com/screenovate/automation/TestActivity.java b/app/src/main/java/com/screenovate/automation/TestActivity.java[m
+[1mindex 4c3ba55..6640b95 100644[m
+[1m--- a/app/src/main/java/com/screenovate/automation/TestActivity.java[m
+[1m+++ b/app/src/main/java/com/screenovate/automation/TestActivity.java[m
+[36m@@ -6,20 +6,25 @@[m [mimport android.util.Log;[m
+ import android.view.KeyEvent;[m
+ import android.view.MotionEvent;[m
+ import android.view.View;[m
+[32m+[m[32mimport android.widget.ScrollView;[m
+ [m
+ [m
+ public class TestActivity extends Activity {[m
+ [m
+     private static final String TAG = "TestActivity";[m
+ [m
+[32m+[m
+     KeyEvent event;[m
+ [m
+[32m+[m[32m    View view;[m
+[32m+[m
+     @Override[m
+     protected void onCreate(Bundle savedInstanceState) {[m
+         Log.i(TAG, "TEST ACTIVITY STARTTED");[m
+         setContentView(R.layout.testactivity);[m
+         super.onCreate(savedInstanceState);[m
+ [m
+[32m+[m
+         if (savedInstanceState == null) {[m
+             setImmersiveMode();[m
+         }[m
+[36m@@ -114,9 +119,27 @@[m [mpublic class TestActivity extends Activity {[m
+         int x = (int) event.getX();[m
+         int y = (int) event.getY();[m
+         Log.i(TAG, "Touch press on x: " + x + " y: " + y);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        switch (event.getAction()) {[m
+[32m+[m
+[32m+[m[32m            case MotionEvent.ACTION_DOWN:[m
+[32m+[m
+[32m+[m[32m                Log.d(TAG, "ACTION_DOWN X= " + event.getX() + " Y= " + event.getY());[m
+[32m+[m
+[32m+[m[32m                break;[m
+[32m+[m
+[32m+[m[32m            case MotionEvent.ACTION_UP:[m
+[32m+[m
+[32m+[m[32m            case MotionEvent.ACTION_MOVE:[m
+[32m+[m
+[32m+[m[32m                Log.d(TAG, " ACTION_MOVE  X= " + event.getX() + " Y= " + event.getY());[m
+[32m+[m
+[32m+[m[32m                break;[m
+[32m+[m
+[32m+[m[32m        }[m
+         return true;[m
+     }[m
+[31m-[m
+     @Override[m
+     public boolean dispatchKeyEvent(KeyEvent ev) {[m
+         Log.d(TAG, ev.toString());[m
+[36m@@ -134,4 +157,5 @@[m [mpublic class TestActivity extends Activity {[m
+         Log.d(TAG, ev.toString());[m
+         return super.dispatchGenericMotionEvent(ev);[m
+     }[m
+[32m+[m
+ }[m
+[1mdiff --git a/app/src/main/res/layout/testactivity.xml b/app/src/main/res/layout/testactivity.xml[m
+[1mindex f6aefc2..8c44dcf 100644[m
+[1m--- a/app/src/main/res/layout/testactivity.xml[m
+[1m+++ b/app/src/main/res/layout/testactivity.xml[m
+[36m@@ -1,5 +1,5 @@[m
+ <?xml version="1.0" encoding="utf-8"?>[m
+[31m-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"[m
+[32m+[m[32m<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"[m
+     xmlns:app="http://schemas.android.com/apk/res-auto"[m
+     android:layout_width="match_parent"[m
+     android:layout_height="match_parent"[m
+[36m@@ -7,14 +7,35 @@[m
+     android:background="@color/background_floating_material_dark"[m
+     android:orientation="vertical">[m
+ [m
+[31m-    <EditText[m
+[31m-        android:layout_width="wrap_content"[m
+[31m-        android:layout_height="wrap_content"[m
+[31m-        android:ems="10"[m
+[31m-        android:layout_marginStart="19dp"[m
+[31m-        android:layout_marginTop="68dp"[m
+[31m-        android:id="@+id/editText"[m
+[31m-        android:hint="Type Keyboard Here"[m
+[31m-        android:layout_alignParentTop="true" />[m
+[31m-[m
+[31m-</RelativeLayout>[m
+\ No newline at end of file[m
+[32m+[m
+[32m+[m[32m    <ScrollView[m
+[32m+[m[32m        android:layout_width="match_parent"[m
+[32m+[m[32m        android:layout_height="match_parent">[m
+[32m+[m
+[32m+[m[32m        <LinearLayout[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:orientation="vertical"[m
+[32m+[m[32m            android:layout_height="match_parent">[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        <EditText[m
+[32m+[m[32m            android:layout_width="wrap_content"[m
+[32m+[m[32m            android:layout_height="wrap_content"[m
+[32m+[m[32m            android:ems="10"[m
+[32m+[m[32m            android:layout_marginStart="19dp"[m
+[32m+[m[32m            android:layout_marginTop="68dp"[m
+[32m+[m[32m            android:id="@+id/editText"[m
+[32m+[m[32m            android:hint="Type Keyboard Here"[m
+[32m+[m[32m            android:layout_alignParentTop="true" />[m
+[32m+[m
+[32m+[m[32m        <View[m
+[32m+[m[32m            android:layout_width="match_parent"[m
+[32m+[m[32m            android:layout_height="1500dp"[m
+[32m+[m[32m            android:background="@android:color/background_light"/>[m
+[32m+[m
+[32m+[m[32m        </LinearLayout>[m
+[32m+[m[32m    </ScrollView>[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m</LinearLayout>[m
+\ No newline at end of file[m
+warning: LF will be replaced by CRLF in app/src/main/java/com/screenovate/automation/TestActivity.java.
+The file will have its original line endings in your working directory.
