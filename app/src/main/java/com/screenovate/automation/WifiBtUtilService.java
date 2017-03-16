@@ -21,13 +21,14 @@ import java.util.List;
 public class WifiBtUtilService extends Service {
 
     private static final String TAG = "WifiBtUtilService";
-    private WifiManager mWifiManager;
+    private WifiManager wifi;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mWifiManager = (WifiManager)getSystemService(WIFI_SERVICE);
+//        wifi = (WifiManager)getSystemService(WIFI_SERVICE);
+        wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class WifiBtUtilService extends Service {
 
 
     private void disconnectAndRemoveWifiNetworks() {
-        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
         for(WifiConfiguration currentConfig : list ) {
             wifiManager.removeNetwork(currentConfig.networkId);
@@ -159,7 +160,7 @@ public class WifiBtUtilService extends Service {
     };
 
     private void enableWifi(Runnable onCompleteRunnable) {
-        int state = mWifiManager.getWifiState();
+        int state = wifi.getWifiState();
 
         if (state == WifiManager.WIFI_STATE_DISABLING || state == WifiManager.WIFI_STATE_UNKNOWN) {
             throw new RuntimeException("Unsupported wifi state: " + state);
@@ -168,7 +169,7 @@ public class WifiBtUtilService extends Service {
         if (state == WifiManager.WIFI_STATE_ENABLING || state == WifiManager.WIFI_STATE_DISABLED) {
             IntentFilter filter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
             registerReceiver(new WifiStateReceiver(onCompleteRunnable), filter);
-            mWifiManager.setWifiEnabled(true);
+            wifi.setWifiEnabled(true);
         } else if (state == WifiManager.WIFI_STATE_ENABLED) {
             onCompleteRunnable.run();
         }
@@ -200,7 +201,7 @@ public class WifiBtUtilService extends Service {
         }
 
         //remove others first
-        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
         for(WifiConfiguration currentConfig : list ) {
             wifiManager.removeNetwork(currentConfig.networkId);

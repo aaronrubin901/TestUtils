@@ -16,21 +16,23 @@ public class SmsUtilService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            if (extras.containsKey("SentSms")) {
-                Log.i(TAG, "Logging Last Sent Sms" + extras.getString("SentSms"));
-                getLastSentSMS();
-            }
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                if (extras.containsKey("SentSms")) {
+                    Log.i(TAG, "Logging Last Sent Sms" + extras.getString("SentSms"));
+                    getLastSentSMS();
+                }
 
-            if (extras.containsKey("ReceiveSms")) {
-                Log.i(TAG, "Logging Last Receive Sms");
-                getLastReceiveSMS();
+                if (extras.containsKey("ReceiveSms")) {
+                    Log.i(TAG, "Logging Last Receive Sms");
+                    getLastReceiveSMS();
 
+                }
             }
         }
-        return super.onStartCommand(intent, flags, startId);
-    }
+            return super.onStartCommand(intent, flags, startId);
+        }
 
     @Nullable
     @Override
