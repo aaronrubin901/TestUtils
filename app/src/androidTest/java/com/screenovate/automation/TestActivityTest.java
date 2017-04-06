@@ -35,6 +35,8 @@ public class TestActivityTest {
 
     @Test
     public void testActivityTest() {
+
+
         ViewInteraction editText = onView(
                 withId(R.id.editText));
         editText.perform(scrollTo(), click());

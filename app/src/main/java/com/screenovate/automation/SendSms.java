@@ -18,19 +18,21 @@ public class SendSms extends Service{
     String msg = null;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            if (extras.containsKey("phone")) {
-                phoneNo = extras.getString("phone");
-                Log.i(TAG, "Phone: " + extras.getString("phone"));
-            }
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                if (extras.containsKey("phone")) {
+                    phoneNo = extras.getString("phone");
+                    Log.i(TAG, "Phone: " + extras.getString("phone"));
+                }
 
-            if (extras.containsKey("msg")) {
-                msg = extras.getString("msg");
-                Log.i(TAG, "message: " + extras.getString("msg"));
+                if (extras.containsKey("msg")) {
+                    msg = extras.getString("msg");
+                    Log.i(TAG, "message: " + extras.getString("msg"));
 
+                }
+                sendSMS(phoneNo, msg);
             }
-            sendSMS(phoneNo, msg);
         }
         return super.onStartCommand(intent, flags, startId);
 
