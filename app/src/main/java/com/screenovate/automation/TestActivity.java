@@ -2,10 +2,14 @@ package com.screenovate.automation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class TestActivity extends Activity {
@@ -13,6 +17,7 @@ public class TestActivity extends Activity {
     private static final String TAG = "TestActivity";
 
     KeyEvent event;
+    private EditText ET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,28 @@ public class TestActivity extends Activity {
         if (savedInstanceState == null) {
             setImmersiveMode();
         }
+        ET = ((EditText) findViewById(R.id.editText));
+        ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int before, int i1, int i2) {
+
+                if (charSequence.length() > 0) {
+
+                    Log.d(TAG, "KEYBOARD LAST CHAR PRESSES " + charSequence.charAt(charSequence.length()-1));
+                    Log.d(TAG, "KEYBOARD COMPLETE SENTENCE " + charSequence);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
@@ -119,7 +145,7 @@ public class TestActivity extends Activity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent ev) {
-        Log.d(TAG, ev.toString());
+        Log.d(TAG, "Key Press" + ev.toString());
         return super.dispatchKeyEvent(ev);
     }
 
