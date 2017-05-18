@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.util.Log;
@@ -80,8 +81,14 @@ public class WifiBtUtilService extends Service {
                     }
                 });
             }
+            else if (intent.getAction().equals("is_wifi_connected")) {
+            WifiInfo wifiInfo = wifi.getConnectionInfo();
+            String name = wifiInfo.getSSID();
+            Log.i(TAG, "CONNECTED TO " + name);
         }
 
+
+    }
         return super.onStartCommand(intent, flags, startId);
     }
 
