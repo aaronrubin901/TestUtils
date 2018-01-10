@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
-public class IsNotificationAcceesEnabled extends Service {
+public class IsNotificationAccessEnabled extends Service {
     public static String TAG = "NotificationAccess";
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -17,7 +17,7 @@ public class IsNotificationAcceesEnabled extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public IsNotificationAcceesEnabled() {
+    public IsNotificationAccessEnabled() {
 
     }
 

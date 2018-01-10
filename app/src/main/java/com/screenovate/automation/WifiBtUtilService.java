@@ -1,8 +1,11 @@
 package com.screenovate.automation;
 
+import android.annotation.TargetApi;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +15,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -141,11 +145,13 @@ public class WifiBtUtilService extends Service {
         }
     };
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void unpairAllBtDevices() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         Log.d(TAG, "unpairAllBtDevices: " + adapter.getBondedDevices().size());
         for (BluetoothDevice device : adapter.getBondedDevices()) {
-            Log.d(TAG, "unbonding device " + device.getName());
+            Log.d(TAG, "unbonding device :" + device.getName()+"STATE "+device.getBondState()+"TYPE " + device.getType());
+
             try {
                 Method m = device.getClass()
                         .getMethod("removeBond", (Class[]) null);

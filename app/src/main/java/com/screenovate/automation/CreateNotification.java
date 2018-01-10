@@ -1,20 +1,17 @@
 package com.screenovate.automation;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
-import java.util.Random;
 
 
 public class CreateNotification extends Service {
@@ -23,9 +20,11 @@ public class CreateNotification extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        String randomNumber = "";
+        String randomNumber;
         Bundle extras = intent.getExtras();
+        Log.i(TAG, "CREATE NOTYYYY" + extras);
         if (extras != null) {
+            Log.i(TAG, "INSODE IF ");
             if (extras.containsKey("random")) {
                 randomNumber = extras.getString("random");
                 Log.i(TAG, "Creating notification with random number " + randomNumber);
@@ -38,6 +37,7 @@ public class CreateNotification extends Service {
         return START_NOT_STICKY;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void createNotification(String randomNumber) {
         Log.i(TAG, "Random notification number is " + randomNumber);
         Intent intent = new Intent(this, ImageViewerActivity.class);
@@ -47,9 +47,10 @@ public class CreateNotification extends Service {
                 .setContentTitle("Automation Notification")
                 .setContentText(randomNumber)
                 .setSmallIcon(R.mipmap.ic_notify)
-                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.ic_notify))
+                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),R.mipmap.ic_notify))
                 .setContentIntent(pendingIntent)
+                .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+                .setPriority(Notification.PRIORITY_MAX)
                 .setOngoing(false).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // hide the notification after its selected
