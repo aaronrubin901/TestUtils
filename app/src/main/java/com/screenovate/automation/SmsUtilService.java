@@ -29,6 +29,10 @@ public class SmsUtilService extends Service {
                     getLastReceiveSMS();
 
                 }
+                if (extras.containsKey("RemoveAll")){
+                    Log.i(TAG, "Removing all sms messages");
+                    removeAllSms();
+                }
             }
         }
             return super.onStartCommand(intent, flags, startId);
@@ -45,10 +49,12 @@ public class SmsUtilService extends Service {
         ContentResolver cr = getContentResolver();
         Cursor c = cr.query(sentURI, null, null, null, "date desc limit 1");
         String str = "";
+        assert c != null;
         for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
             str = "Message receive: from address " + c.getString(c.getColumnIndex("address")) + " body: " +
                     c.getString(c.getColumnIndex("body"));
         }
+        c.close();
         Log.i(TAG, str);
 
     }
@@ -58,11 +64,18 @@ public class SmsUtilService extends Service {
         ContentResolver cr = getContentResolver();
         Cursor c = cr.query(sentURI, null, null, null, "date desc limit 1");
         String str = "";
+        assert c != null;
         for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
             str = "Message sent: to address " + c.getString(c.getColumnIndex("address")) + " body: " +
                     c.getString(c.getColumnIndex("body"));
         }
+        c.close();
         Log.i(TAG, str);
+
+    }
+
+    private void removeAllSms() {
+        getContentResolver().delete(Uri.parse("content://sms/"), null, null);
 
     }
 
