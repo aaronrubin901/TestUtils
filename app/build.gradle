@@ -8,7 +8,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 21
         versionCode 2
-        versionName "2.5"
+        versionName "2.6"
         setProperty("archivesBaseName", "automation-$versionName")
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
